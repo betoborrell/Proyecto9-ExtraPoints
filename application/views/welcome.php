@@ -6,7 +6,9 @@
 		
 		<p>Bienvenido a extrapoints, el mejor lugar para compartir tus puntos y ganar premios.</p>
 		
+		<?php echo anchor('/upload', 'Importa lista de estudiantes'); ?>
+		
 	</div>
 
-	<p class="footer">&iquest;Te quieres ir? Pues  <?php echo anchor('/auth/logout/', 'salte'); ?></p>
+	<p class="footer"><?php echo anchor('/auth/change_password/', 'Cambiar password'); ?> | &iquest;Te quieres ir? Pues  <?php echo anchor('/auth/logout/', 'salte'); ?></p>
 </div>

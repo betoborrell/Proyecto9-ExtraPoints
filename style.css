@@ -55,36 +55,21 @@ p.footer{
 	-webkit-box-shadow: 0 0 8px #D0D0D0;
 }
 
-/**************************************
-** LOGIN FORM
-**************************************/
-.login_form {
+.wrapper {
 	width: 300px;
 	margin: 0 auto;
-}
-.login_form label {
-	display: block;
-	width: 130px;
-	float: left;
-	margin-right: 5px;
-}
-.login_form .unit {
-	margin-bottom: 5px;
 }
 
 /**************************************
-** REGISTER FORM
+** FORM
 **************************************/
-.register_form {
-	width: 300px;
-	margin: 0 auto;
-}
-.register_form label {
+
+.wrapper label {
 	display: block;
 	width: 130px;
 	float: left;
 	margin-right: 5px;
 }
-.register_form .unit {
+.wrapper .unit {
 	margin-bottom: 5px;
 }

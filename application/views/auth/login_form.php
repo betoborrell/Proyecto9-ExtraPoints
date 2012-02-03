@@ -28,7 +28,7 @@ $remember = array(
 ?>
 
 <div class="unit">
-	<div class="container login_form">
+	<div class="container login_form wrapper">
 		<?php echo form_open($this->uri->uri_string()); ?>
 			<div class="unit">
 				<?php echo form_label($login_label, $login['id']); ?>

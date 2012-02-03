@@ -32,7 +32,7 @@ $confirm_password = array(
 ?>
 
 <div class="unit">
-	<div class="container register_form">
+	<div class="container register_form wrapper">
 		<?php echo form_open($this->uri->uri_string()); ?>
 		
 			<?php if ($use_username) { ?>
