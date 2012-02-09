@@ -19,7 +19,7 @@ class Upload extends CI_Controller {
 	function do_upload()
 	{
 		$config['upload_path'] = './uploads/';
-		$config['allowed_types'] = 'xls|xlsx';
+		$config['allowed_types'] = 'csv|xls|xlsx';
 		$config['max_size']	= '1000';
 		$config['overwrite'] = TRUE;
 
@@ -35,7 +35,12 @@ class Upload extends CI_Controller {
 		{
 			$data['upload_data'] = $this->upload->data();
 			
-			$this->load->library('PHPExcel');
+			 $this->load->library('csvreader');  
+  
+	         $filePath = 'uploads/Workbook1.csv';  
+	  
+	         $data['csvData'] = $this->csvreader->parse_file($filePath, false);
+			
 
 			$this->template->load('template/basic', 'upload_success', $data);
 		}
