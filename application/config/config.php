@@ -14,11 +14,8 @@
 | path to your installation.
 |
 */
-//<<<<<<< HEAD
 $config['base_url']	= '/Proyecto9/';
-//=======
-//$config['base_url']	= 'http://192.168.0.115/extrapoints/';
-//>>>>>>> upstream/master
+
 
 /*
 |--------------------------------------------------------------------------

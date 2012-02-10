@@ -229,6 +229,31 @@ p.footer{
 		font-size: 13px;
 		color: #444;
 	}
+	
+	.welcome h1 {
+		text-align: center;
+		font-size: 36px;
+	}
+	
+	.lista-alumnos {
+		padding: 15px;
+		background-color: #FFF;
+		border: 1px solid #C0C0C0;
+		border-radius: 5px;
+		margin-bottom: 10px;
+		box-shadow: 1px 1px 6px #CCC;
+		
+	}
+	.lista-alumnos .alumn{
+		padding-bottom: 10px;
+		margin-bottom: 10px;
+		border-bottom: 1px dotted #DDD;
+		
+	}
+	.lista-alumnos .alumn p{
+		font-size: 11px;
+		
+	}
 
 
 /*		Tablet Layout: 768px.
@@ -250,30 +275,11 @@ px      68    160    252    344    436    528    620    712    */
 		display: block;
 		margin: 0 auto;
 	}
-}
-
-
-
-/*		Mobile Layout: 320px.
-		Gutters: 24px.
-		Outer margins: 34px.
-		Inherits styles from: Default Layout.
----------------------------------------------
-cols    1     2      3
-px      68    160    252    */
-
-@media only screen and (max-width: 767px) {
-	
-	.body {
-		width: 320px;
+	.welcome h1 {
+		text-align: center;
+		font-size: 30px;
 	}
-	.logo {
-		max-width: 250px;
-		height: auto;
-		display: block;
-		margin: 0 auto;
-	}
-	
+
 }
 
 
@@ -297,5 +303,36 @@ px      68    160    252    344    436    */
 		display: block;
 		margin: 0 auto;
 	}
+	.welcome h1 {
+		text-align: center;
+		font-size: 26px;
+	}
+	
+}
+
+/*		Mobile Layout: 320px.
+		Gutters: 24px.
+		Outer margins: 34px.
+		Inherits styles from: Default Layout.
+---------------------------------------------
+cols    1     2      3
+px      68    160    252    */
+
+@media only screen and (max-width: 767px) {
+	
+	.body {
+		width: 320px;
+	}
+	.logo {
+		max-width: 250px;
+		height: auto;
+		display: block;
+		margin: 0 auto;
+	}
+	.welcome h1 {
+		text-align: center;
+		font-size: 24px;
+	}
+
 	
 }
