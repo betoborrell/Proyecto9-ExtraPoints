@@ -53,7 +53,7 @@ class Upload extends CI_Controller {
 	         	$grupo		= $user[7];
 	         	$equipo		= $user[8];
 	         	
-	         	$this->tank_auth->create_alumno($username, $name, $apellido_p, $apellido_m, $fecha, $email, $password, $puntos, $grupo, $equipo);
+	         	$this->tank_auth->create_alumn($username, $name, $apellido_p, $apellido_m, $fecha, $email, $password, $puntos, $grupo, $equipo);
 	         }
 			
 
