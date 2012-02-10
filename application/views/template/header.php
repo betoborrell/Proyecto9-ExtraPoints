@@ -15,6 +15,9 @@
 	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script type="text/javascript" src="<?= base_url('elasticss/elastic.js')?>"></script>
+	<script type="text/javascript" src="<?= base_url('js/extra.js')?>"></script>
 	
 </head>
 <body>
+<div class="unit">
+	<div class="container body">

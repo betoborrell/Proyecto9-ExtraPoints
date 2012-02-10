@@ -13,7 +13,7 @@ class CSVReader {
      * Parse a file containing CSV formatted data.
      * @return    array
      */
-    function parse_file($p_Filepath) {
+    function parse_file($p_Filepath, $ommit = 0) {
         $content = array();
         $cont = 0;
         
@@ -21,11 +21,13 @@ class CSVReader {
         
         $file = fopen($p_Filepath, 'r');
         while( ($row = fgetcsv($file, $this->max_row_size, $this->separator)) !== false ) {            
-            if( $row[0] != null ) { // skip empty lines
+            if( $row[0] != null) { // skip empty lines
                 
+                if($ommit <= $cont)
                	$content[] = $row;
                	
             }
+            $cont++;
         }
         fclose($file);
 		return $content;

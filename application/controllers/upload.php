@@ -37,9 +37,24 @@ class Upload extends CI_Controller {
 			
 			 $this->load->library('csvreader');  
   
-	         $filePath = 'uploads/Workbook1.csv';  
+	         $filePath = 'uploads/'.$data['upload_data']['file_name'];  
 	  
-	         $data['csvData'] = $this->csvreader->parse_file($filePath, false);
+	         $csvdata = $this->csvreader->parse_file($filePath, 1);
+	         
+	         foreach($csvdata as $user) {
+	         	$username	= $user[0];
+	         	$name		= $user[1];
+	         	$apellido_p	= $user[2];
+	         	$apellido_m	= $user[3];
+	         	$fecha		= $user[4];
+	         	$email		= $user[5];
+	         	$password	= $user[0].substr($name, 0,1).substr($apellido_p, 0, 1);
+	         	$puntos		= $user[6];
+	         	$grupo		= $user[7];
+	         	$equipo		= $user[8];
+	         	
+	         	$this->tank_auth->create_alumno($username, $name, $apellido_p, $apellido_m, $fecha, $email, $password, $puntos, $grupo, $equipo);
+	         }
 			
 
 			$this->template->load('template/basic', 'upload_success', $data);

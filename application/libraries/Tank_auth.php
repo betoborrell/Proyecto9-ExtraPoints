@@ -72,6 +72,7 @@ class Tank_auth
 								'user_id'	=> $user->id,
 								'username'	=> $user->username,
 								'status'	=> ($user->activated == 1) ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED,
+								'level'		=> $user->level
 						));
 
 						if ($user->activated == 0) {							// fail - not activated
@@ -117,6 +118,16 @@ class Tank_auth
 
 		$this->ci->session->sess_destroy();
 	}
+	
+	/**
+	 * Get get_user_profile
+	 *
+	 * @return	string
+	 */
+	function get_user_profiles($level = 3)
+	{
+		return $this->ci->users->get_user_profiles();
+	}
 
 	/**
 	 * Check if user logged in. Also test if user is activated or not.
@@ -137,6 +148,16 @@ class Tank_auth
 	function get_user_id()
 	{
 		return $this->ci->session->userdata('user_id');
+	}
+	
+	/**
+	 * Get user_level
+	 *
+	 * @return	string
+	 */
+	function get_user_level()
+	{
+		return $this->ci->session->userdata('level');
 	}
 
 	/**
@@ -185,6 +206,51 @@ class Tank_auth
 				$data['new_email_key'] = md5(rand().microtime());
 			}
 			if (!is_null($res = $this->ci->users->create_user($data, !$email_activation))) {
+				$data['user_id'] = $res['user_id'];
+				$data['password'] = $password;
+				unset($data['last_ip']);
+				return $data;
+			}
+		}
+		return NULL;
+	}
+	
+	/**
+	 * Create new user on the site and return some data about it:
+	 * user_id, username, password, email, new_email_key (if any).
+	 *
+	 * @param	string
+	 * @param	string
+	 * @param	string
+	 * @param	bool
+	 * @return	array
+	 */
+	function create_alumno($username, $name, $apellido_p, $apellido_m, $fecha, $email, $password, $puntos, $grupo, $equipo)
+	{
+		if ((strlen($username) > 0) AND !$this->ci->users->is_username_available($username)) {
+			
+
+		}  else {
+			// Hash password using phpass
+			$hasher = new PasswordHash(
+					$this->ci->config->item('phpass_hash_strength', 'tank_auth'),
+					$this->ci->config->item('phpass_hash_portable', 'tank_auth'));
+			$hashed_password = $hasher->HashPassword($password);
+
+			$data = array(
+				'username'		=> $username,
+				'password'		=> $hashed_password,
+				'email'			=> $email,
+				'last_ip'		=> $this->ci->input->ip_address(),
+				'name'			=> $name,
+				'apellido_p'	=> $apellido_p,
+				'apellido_m'	=> $apellido_m,
+				'fecha'			=> $fecha,
+				'puntos'		=> $puntos,
+				'grupo'			=> $grupo,
+				'equipo'		=> $equipo
+			);
+			if (!is_null($res = $this->ci->users->create_user($data, true))) {
 				$data['user_id'] = $res['user_id'];
 				$data['password'] = $password;
 				unset($data['last_ip']);

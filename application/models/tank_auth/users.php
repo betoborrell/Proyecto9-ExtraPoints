@@ -49,12 +49,31 @@ class Users extends CI_Model
 	 */
 	function get_user_by_login($login)
 	{
+		$table = $this->table_name;
+		
+		$this->db->select('*');
+		$this->db->from($this->table_name);
+	
 		$this->db->where('LOWER(username)=', strtolower($login));
 		$this->db->or_where('LOWER(email)=', strtolower($login));
+		
+		$this->db->join('user_profiles', "$table.id = user_profiles.user_id");
 
-		$query = $this->db->get($this->table_name);
+		$query = $this->db->get();
 		if ($query->num_rows() == 1) return $query->row();
 		return NULL;
+	}
+	
+	/**
+	 * Get user record by login (username or email)
+	 *
+	 * @param	string
+	 * @return	object
+	 */
+	function get_user_profiles($level = 3)
+	{
+		$this->db->where('level', $level);
+		return $this->db->get('user_profiles');
 	}
 
 	/**
@@ -65,9 +84,16 @@ class Users extends CI_Model
 	 */
 	function get_user_by_username($username)
 	{
+		$table = $this->table_name;
+		
+		$this->db->select('*');
+		$this->db->from($this->table_name);
+	
 		$this->db->where('LOWER(username)=', strtolower($username));
+		
+		$this->db->join('user_profiles', "$table.id = user_profiles.user_id");
 
-		$query = $this->db->get($this->table_name);
+		$query = $this->db->get();
 		if ($query->num_rows() == 1) return $query->row();
 		return NULL;
 	}
@@ -80,9 +106,16 @@ class Users extends CI_Model
 	 */
 	function get_user_by_email($email)
 	{
+		$table = $this->table_name;
+		
+		$this->db->select('*');
+		$this->db->from($this->table_name);
+	
 		$this->db->where('LOWER(email)=', strtolower($email));
+		
+		$this->db->join('user_profiles', "$table.id = user_profiles.user_id");
 
-		$query = $this->db->get($this->table_name);
+		$query = $this->db->get();
 		if ($query->num_rows() == 1) return $query->row();
 		return NULL;
 	}
@@ -127,12 +160,40 @@ class Users extends CI_Model
 	 */
 	function create_user($data, $activated = TRUE)
 	{
-		$data['created'] = date('Y-m-d H:i:s');
-		$data['activated'] = $activated ? 1 : 0;
+		$data2 = array(
+				'username'		=> $data["username"],
+				'password'		=> $data["password"],
+				'email'			=> $data["email"],
+				'last_ip'		=> $data["last_ip"],
+		);
+		if(isset($data['name'])){
+			$data3 = array(			
+				'nombre'		=> $data["name"],
+				'apellido_p'	=> $data["apellido_p"],
+				'apellido_m'	=> $data["apellido_m"],
+				'fechaNac'		=> $data["fecha"],
+				'puntos'		=> $data["puntos"],
+					
+			);
+		}
+		if(isset($data['grupo'])){
+			$data4 = array(
+				'grupo'			=> $data["grupo"],
+				'equipo'		=> $data["equipo"]
+			);
+		}
+		$data2['created'] = date('Y-m-d H:i:s');
+		$data2['activated'] = $activated ? 1 : 0;
 
-		if ($this->db->insert($this->table_name, $data)) {
+		if ($this->db->insert($this->table_name, $data2)) {
 			$user_id = $this->db->insert_id();
-			if ($activated)	$this->create_profile($user_id);
+			if ($activated)	{
+				if(isset($data['name'])){
+					$this->create_profile($user_id, $data3);
+				} else {
+					$this->create_profile($user_id);
+				}
+			}
 			return array('user_id' => $user_id);
 		}
 		return NULL;
@@ -375,9 +436,15 @@ class Users extends CI_Model
 	 * @param	int
 	 * @return	bool
 	 */
-	private function create_profile($user_id)
+	private function create_profile($user_id, $data = null)
 	{
-		$this->db->set('user_id', $user_id);
+		if(is_null($data)){
+			$this->db->set("user_id", $user_id);
+		} else {
+			$data['user_id'] = $user_id;
+			$this->db->set($data);
+		}
+		
 		return $this->db->insert($this->profile_table_name);
 	}
 
