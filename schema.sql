@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 10, 2012 at 01:08 AM
+-- Generation Time: Feb 10, 2012 at 11:47 AM
 -- Server version: 5.5.9
 -- PHP Version: 5.3.6
 
@@ -16,51 +16,17 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `alumnoclase`
+-- Table structure for table `alumno_equipo`
 --
 
-CREATE TABLE `alumnoclase` (
-  `idAlumno` int(10) unsigned NOT NULL,
-  `idClase` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`idAlumno`,`idClase`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `alumnoclase`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `alumnoequipo`
---
-
-CREATE TABLE `alumnoequipo` (
+CREATE TABLE `alumno_equipo` (
   `idAlumno` int(10) unsigned NOT NULL,
   `idEquipo` int(10) unsigned NOT NULL,
   PRIMARY KEY (`idAlumno`,`idEquipo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `alumnoequipo`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `alumnopuntos`
---
-
-CREATE TABLE `alumnopuntos` (
-  `idAlumno` int(10) unsigned NOT NULL,
-  `idPunto` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`idAlumno`,`idPunto`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `alumnopuntos`
+-- Dumping data for table `alumno_equipo`
 --
 
 
@@ -143,50 +109,18 @@ CREATE TABLE `login_attempts` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `maestroclase`
---
-
-CREATE TABLE `maestroclase` (
-  `idMaestro` int(10) unsigned NOT NULL,
-  `idClase` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`idMaestro`,`idClase`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `maestroclase`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `maestropuntos`
---
-
-CREATE TABLE `maestropuntos` (
-  `idMaestro` int(10) unsigned NOT NULL,
-  `idPunto` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`idMaestro`,`idPunto`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `maestropuntos`
---
-
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `puntos`
 --
 
 CREATE TABLE `puntos` (
-  `idPunto` int(10) unsigned NOT NULL,
-  `idPersona` int(10) NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `idGiver` int(10) NOT NULL,
+  `idReceiver` int(11) NOT NULL,
+  `puntos` int(5) NOT NULL,
   `fecha` date NOT NULL,
-  `motivo` varchar(50) NOT NULL,
-  PRIMARY KEY (`idPunto`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `idMotivo` int(5) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `puntos`
@@ -249,6 +183,24 @@ CREATE TABLE `user_autologin` (
 --
 
 INSERT INTO `user_autologin` VALUES('02baf1e3bafdaabe981c043198f243ad', 1, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.46 Safari/535.11', '192.168.0.115', '2012-02-10 00:06:58');
+INSERT INTO `user_autologin` VALUES('c2b605fd69ac6f8d564f3a7684005218', 1, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.46 Safari/535.11', '10.20.8.57', '2012-02-10 10:19:15');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_clase`
+--
+
+CREATE TABLE `user_clase` (
+  `idUser` int(10) unsigned NOT NULL,
+  `idClase` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`idUser`,`idClase`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_clase`
+--
+
 
 -- --------------------------------------------------------
 
