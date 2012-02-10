@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://192.168.0.115/extrapoints/';
+$config['base_url']	= 'http://10.20.20.166/extrapoints/';
 
 /*
 |--------------------------------------------------------------------------
