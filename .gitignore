@@ -23,7 +23,6 @@
 # Logs and databases #
 ######################
 *.log
-*.sql
 *.sqlite
 
 # OS generated files #
@@ -36,4 +35,8 @@ Thumbs.db
 # CONFIG FILES #
 ################
 database.php
+<<<<<<< HEAD
 config.php
+=======
+config.php
+>>>>>>> upstream/master

@@ -14,6 +14,8 @@ class Welcome extends CI_Controller
 	{
 		$data['user_id']	= $this->tank_auth->get_user_id();
 		$data['username']	= $this->tank_auth->get_username();
+		
+		$data['alumnos']	= $this->tank_auth->get_user_profiles();
 				
 		$this->template->load('template/basic', 'welcome', $data);
 
