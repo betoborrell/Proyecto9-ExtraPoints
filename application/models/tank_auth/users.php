@@ -173,7 +173,7 @@ class Users extends CI_Model
 				'apellido_m'	=> $data["apellido_m"],
 				'fechaNac'		=> $data["fecha"],
 				'puntos'		=> $data["puntos"],
-					
+				'level'			=> 3
 			);
 		}
 		if(isset($data['grupo'])){
